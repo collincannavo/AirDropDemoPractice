@@ -15,7 +15,14 @@ class DetailViewController: UIViewController {
     var filename = ""
     
     @IBAction func share(_ sender: Any) {
-        
+        if let fileURL = fileToURL(file: filename) {
+            let objectsToShare = [fileURL]
+            let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            let excludedActivities = [UIActivityType.postToFlickr, UIActivityType.postToWeibo, UIActivityType.message, UIActivityType.mail, UIActivityType.print, UIActivityType.copyToPasteboard, UIActivityType.assignToContact, UIActivityType.saveToCameraRoll, UIActivityType.addToReadingList, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo]
+            
+            activityController.excludedActivityTypes = excludedActivities
+            present(activityController, animated: true, completion: nil)
+        }
     }
     
     
